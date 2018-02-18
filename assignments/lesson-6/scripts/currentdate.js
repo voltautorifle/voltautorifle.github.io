@@ -1,4 +1,10 @@
 function time
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>You can use an array to display the name of the weekday:</p>
+
 <p id="demo"></p>
 
 <script>
@@ -14,3 +20,6 @@ document.getElementById("demo").innerHTML = d.getDate();
 var d = new Date();
 document.getElementById("demo").innerHTML = d.getFullYear();
 </script> 
+
+</body>
+</html>
