@@ -14,10 +14,3 @@ document.getElementById("demo").innerHTML = d.getDate();
 var d = new Date();
 document.getElementById("demo").innerHTML = d.getFullYear();
 </script> 
- 
-</body>
-</html>
-SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/yyyy");
-Date date = new Date();
-String date3= sdf.format(date);
-date = sdf.parse(date3);
