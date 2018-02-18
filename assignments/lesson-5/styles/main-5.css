@@ -32,13 +32,12 @@ main figure img { width: 100%; }
 
 section {}
 
-article p.town-article img {  /* This structure refers to img elements that are the posterity of paragraph elements within artcle elements */
-  width: ???; /* fill the page in the small/phone view */
-  margin: ???;
+article p.town-article img { 
+    float: none;
+  width: 400; 
+  margin: 200;
 }
 
 footer {}
 footer aside {}
-footer>p {} /* This structure refers to p elements that are direct children of the footer element */
-
-/* Other Class Selectors */
+footer>p {}
