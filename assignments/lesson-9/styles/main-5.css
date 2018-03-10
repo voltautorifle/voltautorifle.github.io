@@ -1,0 +1,285 @@
+* { box-sizing: border-box;} 
+
+https://fonts.googleapis.com/css?family=lora
+
+body {
+
+  font-size: 16px;
+
+    font-family: 'lora', serif;
+
+  background-color: azure;
+
+}
+
+
+
+header, nav, main, footer {
+
+}
+
+
+
+header {
+
+    font-size: 1.25em;
+
+    vertical-align:text-top;
+
+}
+
+header h1 {
+
+    display:flex;
+
+    justify-content: center
+
+}
+
+header img {}
+
+#subheading{
+
+    font-size: 1.1em;
+
+}
+
+
+
+nav {
+
+  width: 100%;
+
+}
+
+
+
+nav div {
+
+  background-color: #00FFFF;
+
+    display: flex;
+
+  flex-direction: column;
+
+   margin: 0;
+
+  padding: 0;
+
+
+
+}
+
+
+
+nav button {
+
+  margin-left: 0.2em;
+
+  color: #ffffff;
+
+  font-size: 2.75em;
+
+  background-color: #00FFFF;
+
+  border: none;
+
+    text-align: left;
+
+}
+
+nav ul li {
+
+  line-height: 1.5em;
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+nav ul {
+
+  list-style-type: none;
+
+  background-color: #00FFFF;
+
+  padding: 0;
+
+  margin: 0;
+
+  overflow: hidden;
+
+}
+
+
+
+nav ul li a {
+
+  display: block;
+
+  padding: 14px 14px;
+
+  color: #000000;
+
+  text-decoration: none;
+
+}
+
+
+
+nav ul li.active a {
+
+  color: #000000 ;
+
+ background-color:#00FFFF;   
+
+}
+
+nav ul li a:hover {
+
+ color: #000000;
+
+    background-color:#716DBD;
+
+}
+
+
+
+nav ul.hide {
+
+  display: none;
+
+}
+
+
+
+#grid{
+
+    display: grid;
+
+    border: 1px;
+
+    grid-row-gap: .15em;
+
+    align-content: center;
+
+}
+
+
+
+.item1 {
+
+  grid-column-start: 1;
+
+  grid-column-end: 3;
+
+  text-align: center;
+
+}
+
+
+
+#tenday{
+
+    display:none;
+
+}
+
+
+
+#bball{
+
+    width: 100%;
+
+}
+
+
+
+
+
+main {}
+
+main h2 {
+
+    ;
+
+}
+
+main figure { margin: 0 0 .2rem 2%; width:96%; }
+
+main figure img { width: 100%; }
+
+
+
+section {}
+
+
+
+article p.town-article img {
+
+  width: ???; 
+
+  margin: ???;
+
+}
+
+
+
+footer {}
+
+footer aside {}
+
+footer>p {} 
+
+
+
+.topnav.responsive {position: relative;}
+
+  .topnav.responsive a.icon {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 0;
+
+  }
+
+  .topnav.responsive a {
+
+      }
+
+@media only screen and (max-width: 414px){
+
+    .hidden{
+
+    display: none;
+
+    }
+
+    #myTopnav{
+
+    color: #f2f2f2;
+
+    text-align: center;
+
+    padding: 14px 16px;
+
+    text-decoration: none;
+
+    font-size: 1.3em;
+
+        background-color: darkturquoise;
+
+    }
+
+}
+
+.hamburger { display: block; }
+
+
+
+.navigation { list-style: none; padding-left: 0; }
+
+.navigation li { display: none; }
