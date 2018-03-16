@@ -32,31 +32,31 @@
 
       if (towns[i].name === 'Placerton') continue;
 
-      var myArticle = document.createElement('article');
+      var a = document.createElement('article');
 
-      var myH2 = document.createElement('h2');
+      var h1 = document.createElement('h1');
 
-      var myPara1 = document.createElement('p');
+      var p1 = document.createElement('p');
 
-      var myPara2 = document.createElement('p');
+      var p2 = document.createElement('p');
 
-      var myPara3 = document.createElement('p');
+      var p3 = document.createElement('p');
 
-      var myPara4 = document.createElement('p');
+      var p4 = document.createElement('p');
 
-      var myList = document.createElement('ul');
+      var l = document.createElement('ul');
 
 
 
-      myH2.textContent = towns[i].name;
+      h1.textContent = towns[i].name;
 
-      myPara1.textContent = 'Moto: ' + towns[i].motto;
+      p1.textContent = 'Moto: ' + towns[i].motto;
 
-      myPara2.textContent = 'Year Founded: ' + towns[i].yearFounded;
+      p2.textContent = 'Year Founded: ' + towns[i].yearFounded;
 
-      myPara3.textContent = 'Population: ' + towns[i].currentPopulation;
+      p3.textContent = 'Population: ' + towns[i].currentPopulation;
 
-      myPara3.textContent = 'Average Rainfall: ' + towns[i].averageRainfall;
+      p3.textContent = 'Average Rainfall: ' + towns[i].averageRainfall;
 
       
 
@@ -66,21 +66,21 @@
 
 
 
-      myArticle.appendChild(myH2);
+      a.appendChild(h1);
 
-      myArticle.appendChild(myPara1);
+      a.appendChild(p1);
 
-      myArticle.appendChild(myPara2);
+      a.appendChild(p2);
 
-      myArticle.appendChild(myPara3);
+      a.appendChild(p3);
 
-      myArticle.appendChild(myPara4);
+      a.appendChild(p4);
 
-      myArticle.appendChild(myList);
+      a.appendChild(l);
 
 
 
-      section.appendChild(myArticle);
+      section.appendChild(a);
 
     }
 
