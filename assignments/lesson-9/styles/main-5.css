@@ -1,6 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=stemple+Garmond);
-
-@import url(https://fonts.googleapis.com/css?family=Carrois+Gothic+sc);
+@import url(https://fonts.googleapis.com/css?family=lora);
 
  *{ 
 
@@ -18,7 +16,7 @@ h1, h2 {
 
   background-color: #ffffff;
 
-  color: #00FFFF;
+  color: #000000;
 
 }
 
@@ -178,7 +176,7 @@ nav button {
 
   margin-left: 0.2em;
 
-  color: #ffffff;
+  color: #000000;
 
   font-size: 2.75em;
 
@@ -222,7 +220,7 @@ nav ul li a {
 
   padding: 14px 14px;
 
-  color: #ffffff;
+  color: #000000;
 
   text-decoration: none;
 
@@ -406,7 +404,7 @@ display: flex;
 
   background-color: #00FFFF;
 
-    color: #ffffff;
+    color: #000000;
 
 }
 
@@ -516,7 +514,7 @@ footer aside {
 
   padding: 0.5em;
 
-  color: #ffffff;
+  color: #000000;
 
 }
 
@@ -534,7 +532,7 @@ footer>p {
 
   background-color: #00FFFF;
 
-  color: #ffffff;
+  color: #000000;
 
 }
 
@@ -728,7 +726,7 @@ legend {
 
     border: #00FFFF solid 2px;
 
-    color: #ffffff;
+    color: #000000;
 
     background-color:#E0FFFF;;
 
@@ -754,7 +752,7 @@ label span {
 
     padding-bottom: .3em;
 
-    color: #00FFFF;
+    color: #000000;
 
 }
 
