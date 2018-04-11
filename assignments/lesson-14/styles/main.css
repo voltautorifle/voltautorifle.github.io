@@ -156,7 +156,7 @@ nav {
 
 nav div {
 
-  background-color: #00FFFF;
+  background-color: #663300;
 
     display: flex;
 
@@ -180,7 +180,7 @@ nav button {
 
   font-size: 2.75em;
 
-  background-color: #00FFFF;
+  background-color: #663300;
 
   border: none;
 
@@ -202,7 +202,7 @@ nav ul {
 
   list-style-type: none;
 
-  background-color: #00FFFF;
+  background-color: #663300;
 
   padding: 0;
 
@@ -255,7 +255,7 @@ nav ul.hide {
 
 
 
-.weather-container {
+.bike-container {
 
 display: flex;
 
@@ -285,7 +285,7 @@ display: flex;
 
 
 
-.weather-group {
+.bike-group {
 
   display: flex;
 
@@ -313,7 +313,7 @@ display: flex;
 
 
 
-.weather-block {
+.bike-block {
 
   display: flex;
 
@@ -329,7 +329,7 @@ display: flex;
 
 
 
-.weather-desc {
+.bike-desc {
 
   font-family: 'stemple+Garmond', cursive;
 
@@ -343,7 +343,7 @@ display: flex;
 
 
 
-.weather-icon {
+.bike-icon {
 
   width: 100px;
 
@@ -353,91 +353,12 @@ display: flex;
 
 
 
-.temperature {
-
-  width: 100%;
-
-  text-align: center;
-
-}
-
-
-
-.precip-wind {
-
-  width: 100%;
-
-  text-align: center;
-
-}
-
-.weather-data {
+.bike-data {
 
   display: block;
 
 }
 
-
-
-.forecast {
-
-  display: none;
-
-  margin-top: 5px;
-
-}
-
-
-
-.forecast h3 {
-
-  border-style: solid solid none solid;
-
-  text-align: center;
-
-  border-width: 1px;
-
-  font-size: .8em;
-
-  margin: 0;
-
-  padding: 0.5em;
-
-  background-color: #00FFFF;
-
-    color: #000000;
-
-}
-
-
-
-.forecast table {
-
-  border: 1px;
-
-  width: 100%;
-
-  text-align: center;
-
-    border-collapse: collapse;
-
-}
-
-
-
-.forecast table th, .forecast table td {
-
-  border: 2px solid;
-
-  border-collapse: collapse;
-
-  padding: 4px;
-
-    background-color: #00FFFF;
-
-  background-color: #ffffff;
-
-}
 
 
 
@@ -511,7 +432,7 @@ footer {
 
 footer aside {
 
-  background-color: #00FFFF;
+  background-color: #663300;
 
   padding: 0.5em;
 
@@ -531,7 +452,7 @@ footer>p {
 
   padding: 0.5em;
 
-  background-color: #00FFFF;
+  background-color: #663300;
 
   color: #000000;
 
@@ -539,7 +460,7 @@ footer>p {
 
 
 
-weather-container {
+bike-container {
 
   display: flex;
 
@@ -571,7 +492,7 @@ weather-container {
 
 
 
-.weather-group {
+.bike-group {
 
   display: flex;
 
@@ -599,7 +520,7 @@ weather-container {
 
 
 
-.weather-block {
+.bike-block {
 
   display: flex;
 
@@ -615,7 +536,7 @@ weather-container {
 
 
 
-.weather-desc {
+.bike-desc {
 
   font-family: 'stemple+Garmond', cursive;
 
@@ -627,7 +548,7 @@ weather-container {
 
 
 
-.weather-icon {
+.bike-icon {
 
   width: 100px;
 
@@ -637,27 +558,7 @@ weather-container {
 
 
 
-.temperature {
-
-  width: 100%;
-
-  text-align: center;
-
-}
-
-
-
-.precip-wind {
-
-  width: 100%;
-
-  text-align: center;
-
-}
-
-
-
-.weather-data {
+.bike-data {
 
   display: block;
 
@@ -701,19 +602,13 @@ weather-container {
 
 
 
-form#stormdata {
-
-    margin: 1em 3%;
-
-}
-
 fieldset {
 
     background-color: aliceblue;
 
     margin: 1.5em 0;
 
-    border: #00FFFF solid 3px;
+    border: #663300 solid 3px;
 
 }
 
@@ -725,11 +620,11 @@ legend {
 
     padding: .5em;
 
-    border: #00FFFF solid 2px;
+    border: #663300 solid 2px;
 
     color: #000000;
 
-    background-color:#E0FFFF;;
+    background-color:#66CCFF;;
 
     font-size: 1em;
 
@@ -759,7 +654,7 @@ label span {
 
 
 
-.stdate {
+.bdate {
 
     margin-bottom: .1em;
 
@@ -775,11 +670,11 @@ label span {
 
 
 
-.stinfo {
+.pinfo {
 
     font-family: 'stemple+Garmond', cursive;
 
-    Color: #00FFFF;
+    Color: #663300;
 
     margin-left: .7em;
 
@@ -807,9 +702,9 @@ input.submitBtn {
 
     padding: .6em;
 
-  background-color:#E0FFFF;
+  background-color:#66CCFF;
 
-    box-shadow: 3px 3px 9px #00FFFF;
+    box-shadow: 3px 3px 9px #663300;
 
     color: #000000;
 
