@@ -1,143 +1,16 @@
-<!DOCTYPE html>
+The fact that functions are first-class objects means they can have properties and methods themselves. For example, all functions have a length property that returns the number of parameters the function has.
+Let’s use the square() function that we wrote in chapter 4 as an example:
+function square(x) {    return x*x;}
+If we query the length property, we can see that it accepts one parameter:
+square.length<< 1
+If a function takes some time to compute a return value, we can save the result in a cache property. Then if the same argument is used again later, we can return the value from the cache, rather than having to compute the result again. For example, say squaring a number was an expensive computational operation that took a long time. We could rewrite the square() function so it saved each result in a cache object that is a property of the function:
+function square(x){    square.cache = square.cache || {};    if (!square.cache[x]) {        square.cache[x] = x*x;    }    return square.cache[x]}
+An Immediately Invoked Function Expression – or IIFE – (pronounced 'iffy') is an anonymous function that, as the name suggests, is invoked as soon as it’s defined. This is easily achieved by placing parentheses at the end of the function definition (remember we use parentheses to invoke a function). The function also has to be made into an expression, which is done by placing the whole declaration inside parentheses.
+There is no way to remove a variable from a scope once it’s been declared. If a variable is only required temporarily, it may cause confusion if it’s still available later in the code. Even worse, the name of the variable may clash with another piece of code (an external JavaScript library, for example) resulting in errors. Placing any code that uses the temporary variable inside an IIFE will ensure it’s only available while the IIFE is invoked, then it will disappear. The example that follows uses an IIFE to swap the value of two global variables, a and b. This process requires the use of a temporary variable, called temp, which only exists while the IIFE is invoked:
+The dynamic nature of JavaScript means that a function is able to not only call itself, but define itself, and even redefine itself. This is done by assigning an anonymous function to a variable that has the same name as the function.
+Consider the following function:
+function party(){    console.log('Wow this is amazing!');    party = function(){        console.log('Been there, got the T-Shirt');    }}
+This logs a message in the console, then redefines itself to log a different message in the console.
+A promise is created using a constructor function. This takes a function called an executor as an argument. The executor initializes the promise and starts the asynchronous operation. It also accepts two functions as arguments: the resolve() function is called if the operation is successful, and the reject() function is called if the operation fails. The general layout of a promise can be seen in the code below:
+const promise = new Promise( (resolve, reject) => {    // initialization code goes here    if (success) {        resolve(value);    } else {        reject(error);    }});
 
-<html>
-
-  <head>
-
-    <meta charset="utf-8">
-
-
-
-    <title>Our superheroes</title>
-
-
-
-    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
-
-    <link rel="stylesheet" href="heroes.css">
-
-  </head>
-
-
-
-  <body>
-
-
-
-      <header>
-
-
-
-      </header>
-
-
-
-      <section>
-
-
-
-      </section>
-
-
-
-    <script>
-
-    var header = document.querySelector('header');
-
-    var section = document.querySelector('section');
-
-    var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
-
-    var request = new XMLHttpRequest();
-
-    request.open('GET', requestURL);
-
-    request.responseType = 'json';
-
-    request.send();
-
-    request.onload = function() {
-
-      var superHeroes = request.response;
-
-      populateHeader(superHeroes);
-
-      showHeroes(superHeroes);
-
-    }
-
-    function populateHeader(jsonObj) {
-
-      var myH1 = document.createElement('h1');
-
-      myH1.textContent = jsonObj['squadName'];
-
-      header.appendChild(myH1);
-
-      var myPara = document.createElement('p');
-
-      myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
-
-      header.appendChild(myPara);
-
-    }
-
-    function showHeroes(jsonObj) {
-
-      var heroes = jsonObj['members'];
-
-      for(var i = 0; i < heroes.length; i++) {
-
-        var myArticle = document.createElement('article');
-
-        var myH2 = document.createElement('h2');
-
-        var myPara1 = document.createElement('p');
-
-        var myPara2 = document.createElement('p');
-
-        var myPara3 = document.createElement('p');
-
-        var myList = document.createElement('ul');
-
-        myH2.textContent = heroes[i].name;
-
-        myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
-
-        myPara2.textContent = 'Age: ' + heroes[i].age;
-
-        myPara3.textContent = 'Superpowers:';
-
-        var superPowers = heroes[i].powers;
-
-        for(var j = 0; j < superPowers.length; j++) {
-
-          var listItem = document.createElement('li');
-
-          listItem.textContent = superPowers[j];
-
-          myList.appendChild(listItem);
-
-        }
-
-        myArticle.appendChild(myH2);
-
-        myArticle.appendChild(myPara1);
-
-        myArticle.appendChild(myPara2);
-
-        myArticle.appendChild(myPara3);
-
-        myArticle.appendChild(myList);
-
-        section.appendChild(myArticle);
-
-      }
-
-    }
-
-    </script>
-
-  </body>
-
-</html>
