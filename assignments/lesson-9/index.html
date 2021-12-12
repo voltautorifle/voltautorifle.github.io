@@ -1,134 +1,30 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en-us">
-
 <head>
-
   <meta charset="utf-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>home</title>
-
-  <meta name="author" content="Your Name Here">
-
-  <meta name="description" content="page description placeholder">
-
-  <link href="styles/normalize.css" rel="stylesheet"> 
-  <link href="styles/main-5.css" rel="stylesheet">    
-  <link href="styles/medium-5.css" rel="stylesheet">  
-  <link href="styles/large-5.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-
-
-  <header>
-
-    <div class="header-container">
-
-      <div >
-
-        <img class="display-small" src="images/75x75%20logo%201.png" alt="logo">
-
-        <img class="display-medium" src="images/150x150%20logo%202.png" alt="logo">
-
-        <img class="display-large" src="images/225x225%20logo%203.png" alt="logo">
-
-      </div>
-
-      <div class="inline-block align-middle">
-
-        <h1 class="title">Weather report</h1>
-
-        <h3 class="subtitle">Best weather reports</h3>
-
-      </div>
-
-    </div>
-
-  </header>
+	
+      <p>
+The fact that functions are first-class objects means they can have properties and methods themselves. For example, all functions have a length property that returns the number of parameters the function has.
+Let’s use the square() function that we wrote in chapter 4 as an example:
+function square(x) {    return x*x;}
+If we query the length property, we can see that it accepts one parameter:
+square.length<< 1
+If a function takes some time to compute a return value, we can save the result in a cache property. Then if the same argument is used again later, we can return the value from the cache, rather than having to compute the result again. For example, say squaring a number was an expensive computational operation that took a long time. We could rewrite the square() function so it saved each result in a cache object that is a property of the function:
+function square(x){    square.cache = square.cache || {};    if (!square.cache[x]) {        square.cache[x] = x*x;    }    return square.cache[x]}
+An Immediately Invoked Function Expression – or IIFE – (pronounced 'iffy') is an anonymous function that, as the name suggests, is invoked as soon as it’s defined. This is easily achieved by placing parentheses at the end of the function definition (remember we use parentheses to invoke a function). The function also has to be made into an expression, which is done by placing the whole declaration inside parentheses.
+There is no way to remove a variable from a scope once it’s been declared. If a variable is only required temporarily, it may cause confusion if it’s still available later in the code. Even worse, the name of the variable may clash with another piece of code (an external JavaScript library, for example) resulting in errors. Placing any code that uses the temporary variable inside an IIFE will ensure it’s only available while the IIFE is invoked, then it will disappear. The example that follows uses an IIFE to swap the value of two global variables, a and b. This process requires the use of a temporary variable, called temp, which only exists while the IIFE is invoked:
+The dynamic nature of JavaScript means that a function is able to not only call itself, but define itself, and even redefine itself. This is done by assigning an anonymous function to a variable that has the same name as the function.
+Consider the following function:
+function party(){    console.log('Wow this is amazing!');    party = function(){        console.log('Been there, got the T-Shirt');    }}
+This logs a message in the console, then redefines itself to log a different message in the console.
+A promise is created using a constructor function. This takes a function called an executor as an argument. The executor initializes the promise and starts the asynchronous operation. It also accepts two functions as arguments: the resolve() function is called if the operation is successful, and the reject() function is called if the operation fails. The general layout of a promise can be seen in the code below:
+const promise = new Promise( (resolve, reject) => {    // initialization code goes here    if (success) {        resolve(value);    } else {        reject(error);    }});
 
 
-
-  <nav>
-
-    <div>
-
-      <button onclick="toggleMenu()">&#9776;</button>
-
-      <ul id="primaryNav" class="hide">
-
-        <li class="active"><a href="index.html">Home</a></li>
-
-        <li><a href="franklyn-9.html">Franklin</a></li>
-
-        <li><a href="#">Greenville</a></li>
-
-        <li><a href="#">Springfield</a></li>
-
-        <li><a href="stormcenter-9.html">Storm Center</a></li>
-
-        <li><a href="gallery-9.html">Gallery</a></li>
-
-      </ul>   
-
-    </div>
-
-  </nav>
-
-    
-
-  <main>
-
-	   <div class="weather-container">
-
-      <div class="main-image">
-
-        <picture>
-
-          <source srcset="images/franklin-original500.png" media="(max-width: 600px)">
-
-          <source srcset="images/franklin-original800.png" media="(max-width: 1024px)">
-
-          <source srcset="images/franklin-original1100.png">
-
-          <img src="images/franklin-large.jpg" id="main-image" alt="Franklin image">
-
-        </picture>
-
-		   </div>
-
-	  </div>
-
-    <section></section> 
+      </p>		  
   
   </main>
-
-    
-
-  <footer>
-
-    <p class="footer-bar">
-
-      &copy;2018 All Rights Reserved &bull; Weather report &bull; <span id="current-date"></span>
-
-    </p>
-
-  </footer>
-
-
-
-  <script src="scripts/scripts.js"></script>
-
-  <script src="scripts/currentdate.js"></script>
-
-<script src="scripts/index.js"></script>
-
-
-
+   
 </body>
-
 </html>
