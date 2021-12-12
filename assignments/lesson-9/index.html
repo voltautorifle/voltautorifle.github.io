@@ -1,10 +1,4 @@
-<!doctype html>
-<html lang="en-us">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	
-      <p>
+
 The fact that functions are first-class objects means they can have properties and methods themselves. For example, all functions have a length property that returns the number of parameters the function has.
 Let’s use the square() function that we wrote in chapter 4 as an example:
 function square(x) {    return x*x;}
@@ -20,11 +14,3 @@ function party(){    console.log('Wow this is amazing!');    party = function(){
 This logs a message in the console, then redefines itself to log a different message in the console.
 A promise is created using a constructor function. This takes a function called an executor as an argument. The executor initializes the promise and starts the asynchronous operation. It also accepts two functions as arguments: the resolve() function is called if the operation is successful, and the reject() function is called if the operation fails. The general layout of a promise can be seen in the code below:
 const promise = new Promise( (resolve, reject) => {    // initialization code goes here    if (success) {        resolve(value);    } else {        reject(error);    }});
-
-
-      </p>		  
-  
-  </main>
-   
-</body>
-</html>
