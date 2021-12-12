@@ -1,123 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Alcove Digital Systems</title>
-	<link rel="stylesheet" href="css/style.css">
-	<script src="js/jquery-2.2.1.min.js"></script>
-	<script>
-	$(function(){
-		// jQuery Code goes here
-        
- var nameVal = $('input[name="nameVal"]');
+The CSS3 transform property lets you lets you translate, rotate, scale, and/or skew any element on the page. While some of these effects were possible using previously existing CSS features (such as translating with relative and absolute positioning), CSS3 gives you unprecedented control over many more aspects of the element’s appearance.
+Translation functions allow you to move elements left, right, up, or down. These functions are similar to the behavior of position: relative; when declaring top and left, moving elements up and down or left and right along the x and y axes. When you employ a translation function, you’re moving elements without impacting the flow of the document. Unlike position: relative, which allows you to position an element either against its current position or against a parent or other ancestor, a translated element can only be moved relative to its current position.
+The translate(x,y) function moves an element x from the left, and y from the top:
+If you only want to move an element vertically or horizontally, you can use the translatex or translatey functions respectively.
+Transforms don’t work on inline elements. But that’s easy enough to fix. We’ll just add display: inline-block; to our span:
+The scale(x,y) function scales an element by the defined factors horizontally then vertically. If only one value is provided, it will be used for both the x and y values, growing or shrinking your element or pseudo-element while maintaining the original aspect ratio. For example, scale(1) would leave the element the same size, scale(2) would double its proportions, scale(0.5) would halve them, and so on.
+Note that you shouldn’t declare a new transform: because of the cascade, a second transform would override the first.
+The rotate() function rotates an element around the point of origin by a specified angle value.
+.ad-ad2 h1:hover span {    color: #484848;    transform: rotate(10deg) translateX(40px) scale(1.5);}
+The skew(x,y) function specifies a skew along the x and y axes. As you’d expect, the x specifies the skew on the x axis, and the y specifies the skew on the y axis. If the second parameter is omitted, the skew will only occur on the x axis:
+transform: skew(15deg, 4deg);
+Let’s say that you were transforming a circle. Because the default transform-origin is the center of the circle, applying a rotate() transform to a circle would have no visible effect—a circle rotated 90 degrees still looks exactly the same as it did before being rotated. An ellipse rotated 180 degrees around its center would also look the same as it did before being rotated upside down. However, if you gave your circle or ellipse a transform-origin of 10% 10% or top center, you would notice the rotation 
+The order of transform functions does matter: if you rotate before translating, your translate direction will be on the rotated axis. 
+Include the transition functions in your default style declaration using the transition properties, including: transition-property, transition-duration, transition-timing-function, and transition-delay. We’ll look at each of these and how they work shortly.
 
-                function FillEmpty(){
+The transition-timing-function lets you control the pace of the transition in even more granular detail. Do you want your animation to start off slow and become faster, start off fast and end slower, advance at an even keel, or some other variation?
+The most common timing functions include the key terms ease, linear, ease-in, ease-out, or ease-in-out. The default ease has a slow start, then it speeds up, and ends slowly. ease-in-out is similar to ease, but accelerates more sharply at the beginning. linear creates a transition that animates at a constant speed. ease-in creates a transition that is slow to start but gains speed, then stops abruptly. The opposite, ease-out, starts at full speed, then slows progressively as it reaches the conclusion of the transition. The best way to familiarize yourself with them is to play around and try them all. Most often, one will just feel right for the effect you’re aiming to create. It’s helpful to set a relatively long transition-duration when testing timing functions—if it’s too fast, you may not be able to tell the difference.
+For an animation called myAnimation, the @keyframes rule would look like this:
+@-webkit-keyframes myAnimation {     /* put animation keyframes here */}@keyframes myAnimation {     /* put animation keyframes here */}
+Do not quote the animation name.
+Inside each keyframe include the properties you want to animate, along with the animated values. The values will be smoothly interpolated by the browser’s animation engine between each keyframe.
+Keyframes can be specified in any order; it’s the percentage values rather than the order of the declarations that determine the sequence of keyframes in the animation.
+Here are a few simple animations:
+@keyframes moveRight {     from {    transform: translateX(-50%);    }    to {    transform: translateX(50%);    }}
+@keyframes appearDisappear {     0%, 100% {    opacity: 0;    }    20%, 80% {    opacity: 1;    }}
+@keyframes bgMove {    100% {    background-position: 120% 0;    }}
+While animation-name is the only required animation property to create an animation, the animation-durationshould be considered required to animate an element. Without declaring the duration it defaults to 0s, which is imperceptible, but still fires the animationstart and animationend events. The other animation properties, while they enable you to better control your animation, are optional.
+Like the transition-timing-function property, the animation-timing-function determines how the animation will progress over its duration. The options are the same as for transition-timing-function: ease, linear, ease-in, ease-out, ease-in-out, a developer-defined cubic-bezier() function, step-start, step-end, or a developer-defined number of steps with the steps(number, direction) function:
+The animation-iteration-count property lets you define how many times the animation will play through. The value is generally an integer, but you can also use numbers with decimal points (in which case, the animation will end partway through an iteration), or the value infinite for endlessly repeating animations. If omitted, it will default to 1, in which case the animation will occur only once.
+Fortunately, there’s a shorthand for all of these animation properties, especially since we’re still including the -webkit- prefix. The animation property takes as its value a space-separated list of values for the longhand animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction, animation-fill-mode, and animation-play-state properties:
+.verbose {    animation-name: appearDisappear;     animation-duration: 300ms;     animation-timing-function: ease-in;    animation-iteration-count: 1;    animation-direction: alternate;    animation-delay: 5s;    animation-fill-mode: backwards;    animation-play-state: running;}
+/* shorthand */.concise {    animation: 300ms ease-in alternate 5s backwards appearDisappear;}
+If using the shorthand property, be careful with your animation-name. You want to avoid accidentally using any animation property key term such as forwards, running, or alternate. Those three key terms in particular have caused many developers hours of debugging. If you include a key term, the browser will assume that the first occurrence of a valid value for any of the longhand properties is the value for that property, not the value for the animation-name property.
 
-                    if( nameVal.val() == '' ){
 
-                        nameVal.val( 'John Doe' );
 
-                    }
 
-                }
 
-            $('#ReqAQuoteBtn').click( FillEmpty );
-	})
-	</script>
-</head>
-<body>
-<!-- Master Container Div -->
-	<div class="container">
-	<!-- Header Div containing the Logo & Navigation Links -->
-		<div class="header">
-			<div class="logo" id="alcoveLogo"></div>
-			<div class="navbar">
-				<ul class="navigation">
-					<li><a href="#">About Us</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Catalog</a></li>
-					<li><a href="#">Support</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Contact Us</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- Content Div -->
-		<div class="content">
-			<div class="headImage"></div>
-			<!-- Get a Free Quote Form -->
-			<div class="registerForm">
-				<form id="GetAQuoteForm">
-					<img class="ReqAQuoteImg" src="img/quote.png" alt="">
-					<br>
-					<div class="FormFieldHolder">
-						<div class="labelHolder"><label>Full Name</label></div>
-						<div class="FieldHolder"><input type="text" name="nameVal"></div>
-					</div>
 
-					<div class="FormFieldHolder">
-						<div class="labelHolder"><label>E-Mail</label></div>
-						<div class="FieldHolder"><input type="text" name="emailVal"></div>
-					</div>
 
-					<div class="FormFieldHolder">
-						<div class="labelHolder"><label>Phone</label></div>
-						<div class="FieldHolder"><input type="text" name="phoneNum"></div>
-					</div>
 
-					<div class="FormFieldHolder">
-						<div class="labelHolder"></div>
-						<div class="FieldHolder"><button type="button" id="ReqAQuoteBtn" data-code="028">Request A Quote !</button></div>
-					</div>
-				</form>
-			</div>
-			<h2 class="motto">We Bring Your Digital Dreams To Life</h2>
-			<!-- Content Boxes Container Div -->
-			<div class="contentBoxes">
-				<div class="boxes box1">
-					<h2>The Values that Drive Us</h2>
-					<hr>
-					<p>Alcove adopts various driving factors of corporate philosophy in our day to day activities that ultimately lead to success. We strive to achieve our value guidelines by incorporating our principles into each relationship with our clients to obtain long lasting customers. <br><br>Our core values : <br><br></p>
-					<ul class="coreValues">
-						<li>Innovative Ideas</li>
-						<li>Ownership</li>
-						<li>Frugality</li>
-						<li>Integrity</li>
-						<li>Trustworthiness</li>
-						<li>Customer Obsession</li>
-					</ul>
-				</div>
-				<div class="boxes box2">
-					<h2>What we do</h2>
-					<hr>
-					<p>Innovation is the key to success. Alcove's expertise covers a wide range of services, technologies, tools and platforms. Here are some of the things we're really good at :<br><br></p>
-					<ul>
-						<li><a href="#" class="servicesBtn">Web Design & Development</a></li>
-						<li><a href="#" class="servicesBtn">Web Application Development</a></li>
-						<li><a href="#" class="servicesBtn">iOS Mobile Application Development</a></li>
-						<li><a href="#" class="servicesBtn">UI/UX Design & Development</a></li>
-						<li><a href="#" class="servicesBtn">Android Application Development</a></li>
-					</ul>
-				</div>
-				<div class="boxes box3">
-					<h2>Our Work</h2>
-					<hr>
-					<a href="#" class="showcaseBtn"><img src="img/websites.jpg" alt=""></a>
-					<a href="#" class="showcaseBtn"><img src="img/mobileapps.jpg" alt=""></a>
-					<a href="#" class="showcaseBtn"><img src="img/webapps.jpg" alt=""></a>
-					<select name="showcaseOthers" id="showcaseOthers">
-						<option value="01">UI/UX Design</option>
-						<option value="02">Big Data Implementation</option>
-						<option value="03">Graphic Design</option>
-						<option value="04">3D Animation</option>
-					</select>
-				</div>
-			</div>
-		</div>
 
-		<div class="footer">
-			<h5>© Alcove Digital Systems | <a href="#">Terms of Use</a> | <a href="animatedMenuBegin.htm">Animated Menu</a> | <a href="DropDownMenuBegin.htm">Drop Down Menu</a> | <a href="fruitBasketBegin.htm">Fruit Basket Collections</a> | <a href="InsertHTMLBegin.htm">Insert HTML</a> | <a href="toggleButtonBegin.htm">Toggle Button</a></h5>
-		</div>
-	</div>
-</body>
-</html>
