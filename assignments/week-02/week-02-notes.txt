@@ -1,0 +1,37 @@
+In JavaScript there are two types of comment:
+Single line comments starting with // and finishing at the end of the line:
+Multi-line comments starting with /* and finishing with */
+JavaScript has seven different data types. Six of them are primitive data types and are listed below:
+String
+Symbol (The symbol primitive data type was only introduced in ES6.)
+Number
+Boolean
+Undefined
+Null
+Any value that isn’t one of the primitive data types listed above is an object.
+const n = 12;
+if (n%2 === 0) {
+console.log('n is an even number');
+} else {
+console.log('n is an odd number');
+}
+<< 'n is an even number'
+We’ll start by looking at a while loop. This will repeatedly run a block of code while a certain condition is true, and takes the following structure:let bottles = 10;
+while (bottles > 0){
+   console.log(`There were ${bottles} green bottles, hanging on a wall. And if one green bottle should accidentally fall, there'd be ${bottles-1} green bottles hanging on the wall`);
+   bottles--;
+}
+You can place a loop inside another loop to create a nested loop. It will have an inner loop that will run all the way through before the next step of the outer loop occurs.
+Here’s an example that produces a multiplication table up to 12 x 12:
+Copy
+for(let i=1 ; j<13 ; i++){
+for(let i=1 ; j<13 ; j++){
+   console.log(`${j} multiplied by ${i} is ${i*j}`);
+   }
+}
+To define a function literal we can use a function declaration:
+Copy
+function hello(){
+   console.log('Hello World!');
+}
+

@@ -1,0 +1,4 @@
+I am terrible with taking notes and didn't see any exercises so all I got is this.
+
+Another point to remember is computers are stupid. They can sometimes seem smart because they are so fast at being stupid.
+They can make all kinds of stupid mistakes, evaluate and reject them according to some rule they’ve been given, and then finally end up making a good choice.
