@@ -1,0 +1,80 @@
+An object literal is an object that is created directly in the language by wrapping all its properties and methods in curly braces {}. Object literals are a distinguishing feature of the JavaScript language, as they allow objects to be created quickly without the need for defining a class. They also provide a useful way of organizing your code without polluting the global namespace.
+Here is an example of an object literal that describes the Man of Steel:
+Copy
+const superman = {
+   name: 'Superman',
+   'real name': 'Clark Kent',
+   height: 75,
+   weight: 235,
+   hero: true,
+   villain: false,
+   allies: ['Batman','Supergirl','Superboy'],
+   fly() {
+       return 'Up, up and away!';
+   }
+};
+
+You can access the properties of an object using the dot notation that we’ve already seen in previous chapters. This will return the value of that property, as can be seen in the example below:
+Copy
+superman.name
+<< 'Superman'
+You can also access an object’s properties using bracket notation ― the property is represented by a string inside square brackets, so needs to be placed inside single or double quotation marks:
+Copy
+superman['name']
+<< 'Superman'
+An object literal can be passed as a parameter to a function. This is useful when there are a large number of parameters, as it allows the arguments to be provided by name and in any order. This means you don't have to remember the order to enter them when invoking a function.
+The following example shows how this can be done using a function called greet(). This accepts three parameters:
+Copy
+function greet({greeting,name,age}) {
+   return `${greeting}! My name is ${name} and I am ${age} years old.`;
+}
+Here’s an example of how the function can be used. Notice how the order of the properties in the argument object differs from the order they are listed in the object provided as a parameter to the function:
+Copy
+greet({ greeting: `What's up dude`, age: 10, name: `Bart` });
+<< 'What\'s up dude! My name is Bart and I am 10 years old.'
+The keyword this refers to the object that it is within. It can be used inside methods to gain access to the object’s properties.
+To demonstrate using this, we'll create a dice object that has a sides property and a roll() method that returns a number between 1 and the number of sides.
+Here’s the code to create our dice object:
+Copy
+const dice = {
+   sides: 6,
+   roll() {
+       return Math.floor(this.sides * Math.random()) + 1;
+   }
+}
+This object has a sides property and a roll() method. Inside the roll() method we use this.sides to refer to the value of the object's sides property.
+We also use the random() and floor() methods of the Math object to return a number between 1 and the number of sides.
+Let’s take it for a spin:
+Copy
+dice.roll();
+<< 5
+
+
+dice.roll();
+<< 3
+If we want to change the number of sides, all we need to do is modify the sides property:
+Copy
+dice.sides = 20;
+<< 20
+Now the roll() method will return a random number between 1 and 20 instead, without us having to modify it:
+Copy
+dice.roll();
+<< 12
+
+
+dice.roll();
+<< 18
+The recommended way of dealing with events, and the current standard, is to use event listeners. These were outlined in DOM level 2 and allow multiple functions to be attached independently to different events. They are supported in all modern browsers, although only in Internet Explorer from version 9 onwards.
+The addEventListener() method is called on a node object, the node to which the event listener is being applied. For example, this code will attach an event listener to the document’s body:
+Copy
+document.body.addEventListener('click',doSomething);
+We have already seen the click event that occurs when a mouse button is clicked. There are also the mousedown and mouseup events. These both occur before a click event is fired.
+To see this in action, remove all the code in main.js and replace it with the following:
+Copy
+const clickParagraph = document.getElementById('click');
+
+
+clickParagraph.addEventListener('click',() => console.log('click') );
+clickParagraph.addEventListener('mousedown',() => console.log('down') );
+clickParagraph.addEventListener('mouseup',() => console.log('up') );
+
