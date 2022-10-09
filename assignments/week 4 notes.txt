@@ -1,0 +1,142 @@
+We’ll start off with a simple example of a form that contains one input field, and a button to submit a search query, not unlike the one used by Google. This example doesn’t use any styles; you just need to create a file called search.html that contains the following code:
+
+Copy
+<!doctype html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>Search</title>
+</head>
+<body>
+    <form name='search' action='/search'>
+        <input name='searchInput'>
+        <button type='submit'>Search</button>
+    </form>
+<script src='main.js'></script>
+</body>
+</html>
+This form has a name attribute of search, and contains two controls: an input field where a user can enter a search phrase, and a button to submit the form. The form can also be submitted by pressing Enter.
+
+The action attribute is the URL that the form will be submitted to so it can be processed on the server side. The input field also has a name attribute of searchInput that is used to access the information inside it.
+
+You should also create a file called main.js to put the JavaScript in. This can be saved in the same directory as search.html.
+
+Form objects have a number of useful properties and methods that can be used to interact with the form.
+
+The form.submit() method will submit the form automatically. Note that submitting a form using this method won’t trigger the form submit event that's covered in the next section.
+
+A form can be submitted manually by the user employing a button or input element with a type attribute of submit, or even an input element with a type attribute of image:
+
+Copy
+<button type='submit'>Submit</button>
+<input type='submit' value='Submit'>
+<input type='image' src='button.png'>
+The form.reset() method will reset all the form controls back to their initial values specified in the HTML.
+
+A button with a type attribute of reset can also be used to do this without the need for additional scripting:
+
+Copy
+<button type='reset'>Reset</button>
+
+The focus event occurs when an element is focused on. In the case of an <input> element, this is when the cursor is placed inside the element (either by clicking or tapping on it or navigating to it using the keyboard). To see an example, add the following code to main.js:
+
+Copy
+const input = form.elements.searchInput;
+
+input.addEventListener('focus', () => alert('focused'), false);
+The blur event occurs when the user moves the focus away from the form element. Add the following to main.js, reload the page, and then move the cursor away from the search box:
+
+Copy
+input.addEventListener('blur', () => alert('blurred'), false);
+The change event occurs when the user moves the focus away from the form element after changing it. So if a user clicks in an input field and makes no changes, and then clicks elsewhere, the change event won’t fire, but the blur event will.
+
+input.addEventListener('change', () => alert('changed'), false);
+Possibly the most important form event is the submit event, occurring when the form is submitted. Usually this will send the content of the form to the server to be processed, but we can use JavaScript to intercept the form before it’s sent by adding a submit event listener. Add the following code to the main.js file:
+
+Copy
+const form = document.forms['search'];
+form.addEventListener ('submit', search, false);
+
+function search() {
+    alert(' Form Submitted');
+}
+It is also possible to implement custom form validation using JavaScript. For example, say we wanted to exclude any superhero names that begin with an 'X'. This is not a standard form of validation, so we’d have to write our own. Add this code to main.js to see an example of custom validation:
+
+Copy
+form.addEventListener('submit',validate,false);
+
+function validate(event) {
+    const firstLetter = form.heroName.value[0];
+    if (firstLetter.toUpperCase() === 'X') {
+        event.preventDefault();
+        alert('Your name is not allowed to start with X!');
+    }
+}
+A submit button can be disable by added the disabled attribute to the <input> element:
+
+Copy
+<button type='submit' id='submit' disabled>Submit</button>
+This can be changed programmatically using the disabled property of the <button> element. The following function will disable the button if an input field is empty:
+
+Copy
+function disableSubmit(event) {
+    if(event.target.value === ''){
+        document.getElementById('submit').disabled = true;
+    } else {
+        document.getElementById('submit').disabled = false;
+    }
+}
+ES6 introduced the new class declaration syntax that does exactly the same thing as a constructor function, but looks much similar to writing a class in a class-based programming language. Here is the dice example again, using a class declaration:
+
+Copy
+class Dice {
+    constructor(sides=6) {
+        this.sides = sides;
+    }
+
+    roll() {
+        return Math.floor(this.sides * Math.random() + 1)
+    }
+}
+For example, a very simple Pi module would have the following code saved in a file called 'pi.js':
+
+Copy
+export const PI = 3.1415926;
+This would then be imported into your main JavaScript file, main.js using the following code:
+
+Copy
+import { PI } from './pi.js';
+This would then allow you to use the variable PI inside the main.js file.
+
+Functions can also be exported from a module. For example, we could create a library for our stats functions that we used earlier:
+
+Copy
+function square(x) {
+    return x * x;
+}
+
+function sum(array, callback) {
+    if(callback) {
+        array = array.map(callback);
+    }
+    return array.reduce((a,b) => a + b );
+}
+
+function variance(array) {
+    return sum(array,square)/array.length - square(mean(array))
+}
+
+function mean(array) {
+    return sum(array) / array.length;
+}
+
+export {
+    variance,
+    mean
+}
+Notice that an alternative to using export when the function is defined is to add the export directive after the function definition, as seen in the example above with the variance() function.
+
+To import these functions into the main.js file, you’d add this line of code:
+
+Copy
+import  { mean, variance } from './stats.js';
