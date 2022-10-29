@@ -1,0 +1,228 @@
+A recursive function is one that invokes itself until a certain condition is met. It’s a useful tool to use when iterative processes are involved. A common example is a function that calculates the factorial of a number:
+
+Copy
+function factorial(n) {
+    if (n === 0) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+This function will return 1 if 0 is provided as an argument (0 factorial is 1), otherwise it will multiply the argument by the result of invoking itself with an argument of one less. The function will continue to invoke itself until finally the argument is 0 and 1 is returned. This will result in a multiplication of 1, 2, 3 and all the numbers up to the original argument.
+
+Another example from the world of mathematics is the Collatz Conjecture. This is a problem that is simple to state, but, so far, has not been solved. It involves taking any positive integer and following these rules:
+
+If the number is even, divide it by two
+
+If the number is odd, multiply it by three and add one
+
+For example, if we start with the number 18, we would have the following sequence:
+
+18, 9, 28, 14, 7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1, 4, 2, 1, ...
+
+As you can see, the sequence becomes stuck in a loop at the end, cycling through “4,2,1”. The Collatz Conjecture states that every positive integer will create a sequence that finishes in this loop. This has been verified for all numbers up to 5 × 2⁶⁰, but there is no proof it will continue to be true for all the integers higher than this. To test the conjecture, we can write a function that uses recursion to keep invoking the function until it reaches a value of 1 (because we want our function to avoid being stuck in a recursive loop at the end!):
+
+Copy
+function collatz(n, sequence=[n]) {
+    if (n === 1){
+        return `Sequence took ${sequence.length} steps. It was ${sequence}`;
+    }
+
+    if (n%2 === 0) {
+        n = n/2;
+    } else { 
+        n = 3*n + 1;
+    }
+
+    return collatz(n,[...sequence,n]);
+}
+This function takes a number as a parameter, as well as another parameter called sequence, which has a default value of an array containing the first parameter. The second parameter is only used when the function calls itself recursively.
+
+The first thing the function does is tests to see if n has a value of 1. If it does, the function returns a message to say how many steps it took. If it hasn't reached 1, it checks if the value of n is even (in which case it divides it by 2), or odd, in which case it multiplies by 3 and then adds 1. The function then calls itself, providing the new value of n and the new sequence as arguments. The new sequence is constructed by placing the old sequence and the value of n inside a new array and applying the spread operator to the old sequence.
+
+Let's see what happens to the number 18:
+
+Copy
+collatz(18);
+<< 'Sequence took 21 steps. It was 18,9,28,14,7,22,11,34,17,52,26,13,40,20,10,5,16,8,4,2,1'
+As you can see, it takes 21 steps, but eventually it ends up at 1.
+
+Have a go at using the function and see if you can find a value above 5 × 2⁶⁰ that doesn’t end at 1 — you’ll be famous if you do!
+
+Here’s an example of a function called wait() that accepts a callback. To simulate an operation that takes some time to happen, we can use the setTimeout() function to call the callback after a given number of seconds:
+
+Copy
+function wait(message, callback, seconds){
+    setTimeout(callback,seconds * 1000);
+    console.log(message);
+}
+Now let’s create a callback function to use:
+
+Copy
+function selfDestruct(){
+    console.log('BOOOOM!');
+}
+If we invoke the wait() function then log a message to the console, we can see how JavaScript works asynchronously:
+
+Copy
+wait('This tape will self-destruct in five seconds ... ', selfDestruct, 5);
+console.log('Hmmm, should I accept this mission or not ... ?');
+
+<< 'This tape will self-destruct in five seconds ... '
+<< 'Hmmm, should I accept this mission or not ... ? '
+<< 'BOOOOM!'
+When the wait() function is invoked, any code inside it is run, so the message 'This tape will self destruct in five seconds ... ' is displayed. The setTimeout() function is asynchronous, which means that the callback provided as an argument is placed on top of a stack that gets cleared once the rest of the program has run. This means that control is handed back to the program and the next line in the program is run, which displays the message ‘Hmmm, should I accept this mission or not ... ?’ Then, after five seconds, the callback is retrieved from the stack and invoked. This demonstrates that the setTimeout() function did not block the rest of the program from running.
+A promise is created using a constructor function. This takes a function called an executor as an argument. The executor initializes the promise and starts the asynchronous operation. It also accepts two functions as arguments: the resolve() function is called if the operation is successful, and the reject() function is called if the operation fails. The general layout of a promise can be seen in the code below:
+
+Copy
+const promise = new Promise( (resolve, reject) => {
+    // initialization code goes here
+    if (success) {
+        resolve(value);
+    } else {
+        reject(error);
+    }
+});
+A Dicey Example
+Let's take a look at an example of a promise that uses the dice object we created back in chapter 5:
+
+Copy
+const dice = {
+    sides: 6,
+    roll() {
+        return Math.floor(this.sides * Math.random()) + 1;
+    }
+}
+Now let's create a promise that uses the dice.roll() method as the asynchronous operation and considers rolling a 1 as a failure, and any other number as a success:
+
+Copy
+const promise = new Promise( (resolve,reject) => {
+    const n = dice.roll();
+    setTimeout(() => {
+        (n > 1) ? resolve(n) : reject(n);
+    }, n*1000);
+});
+This creates a variable called promise that holds a reference to the promise. The promise calls the roll() method and stores the return value in a variable called n. Next, we use an if-else block to specify the conditions for success (rolling any number higher than 1) and failure (rolling a 1). The setTimeout() method we met in Chapter 9 is used to add a short delay based on the number rolled. This is to mimic the time taken for an asynchronous operation to complete.
+
+Notice that both the resolve() and reject() functions return the value of the n variable. This can be used when dealing with the outcome of the promise once it’s been settled.
+
+Dealing With A Settled Promise
+Once a promise has been settled, the then() method can be used to deal with the outcome. This method accepts two arguments. The first is a fulfilment function that’s called when the promise is resolved. Any data returned from the resolve() function will be passed along to this function. The second argument is a rejection function that’s called if the promise is rejected. Similar to the fulfilment function, the rejection function receives any data returned from the reject() function.
+
+In the case of our dice example, both functions will receive the value of the number rolled. Let's have a look at how we could deal with that:
+
+Copy
+promise.then( result => console.log(`Yes! I rolled a ${result}`), result => console.log(`Drat! ... I rolled a ${result}`) );
+The first argument is simply a function that logs a celebratory message to the console, stating the number rolled (this is passed to the then() method as the variable result). The second argument logs an annoyed message and, again, states the number rolled.
+
+Alternatively, the catch() method can be used to specify what to do if the operation fails instead:
+
+Copy
+promise.catch( result => console.log(`Drat! ... I rolled a ${result}`));
+The then() and catch() methods can be chained together to form a succinct description of how to deal with the outcome of the promise:
+
+Copy
+promise.then( result => console.log(`I rolled a ${result}`) )
+            .catch( result => console.log(`Drat! ... I rolled a ${result}`) );
+To try this code out, paste the following code into your browser console or use JS Bin with ES6/Babel enabled:
+
+Copy
+const dice = {
+sides: 6,
+    roll() {
+        return Math.floor(this.sides * Math.random()) + 1;
+    }
+}
+
+console.log('Before the roll');
+
+const roll = new Promise( (resolve,reject) => {
+    const n = dice.roll();
+    if(n > 1){
+        setTimeout(()=>{resolve(n)},n*200);
+    } else {
+        setTimeout(()=>reject(n),n*200);
+    }
+});
+
+roll.then(result => console.log(`I rolled a ${result}`) )
+.catch(result => console.log(`Drat! ... I rolled a ${result}`) );
+
+console.log('After the roll');
+When you press the 'Run' button, you should see the following output in the console:
+
+Copy
+before promise 
+promise pending... 
+after promise
+Then there should be a pause, while the promise is resolved, followed by the resulting message:
+
+Copy
+Drat! ... I rolled a 1
+
+To demonstrate how to update a web page using Ajax, we’ll need to set up a demonstration page. Create a file called 'ajax.html' that contains the following code:
+
+Copy
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>Ajax Example</title>
+</head>
+<body>
+<button id='number'>Number Fact</button>
+<button id='chuck'>Chuck Norris Fact</button>
+<div id='output'>
+    Ajax response will appear here
+</div>
+<script src='main.js'></script>
+</body>
+This is a standard HTML5 web page that contains two buttons and a <div> element. Each button will be used to make a different type of Ajax request. One will request plain text and the other will request a JSON string from an external API. The div with an id of 'output' will be where we’ll insert the response we receive from the Ajax request.
+
+For our Ajax requests, we'll be using a couple of online APIs. The first is NumbersAPI, which returns facts about random numbers as a text string. The second is chucknorris.io, which returns a JSON string, containing a random satirical factoid about everybody's favorite hard man, Chuck Norris.
+Now we need a JavaScript file. This should be called main.js and can be saved in the same directory as the other files. Add the following code to start with:
+
+Copy
+const textButton = document.getElementById('number');
+const apiButton = document.getElementById('chuck');
+const outputDiv = document.getElementById('output');
+This assigns each of the buttons in the HTML file to a variable, so we can refer to them later in the file.
+
+Next, we'll assign some URLs to variables:
+
+Copy
+const textURL = 'http://numbersapi.com/random';
+const apiURL = 'https://api.chucknorris.io/jokes/random';
+And finally, we'll assign an event handler to each button. Let's start with the Number Fact button:
+
+Copy
+textButton.addEventListener('click', () => {
+    fetch(textURL)
+    .then( response => {
+        outputDiv.innerHTML = 'Waiting for response...';
+    if(response.ok) {
+        return response;
+    }
+        throw Error(response.statusText);
+    })
+    .then( response => response.text() )
+    .then( text => outputDiv.innerText = text )
+    .catch( error => console.log('There was an error:', error))
+},false);
+This uses the format we saw earlier to construct a fetch request. This returns a promise that resolves to a string. We can then place that string inside the <div> with an id of 'output' by assigning it its innerText property.
+And now for the Chuck Norris Fact button:
+
+Copy
+apiButton.addEventListener('click', () => {
+    fetch(apiURL)
+    .then( response => {
+        outputDiv.innerHTML = 'Waiting for response...';
+    if(response.ok) {
+        return response;
+    }
+    throw Error(response.statusText);
+    })
+    .then( response => response.json() )
+    .then( data => outputDiv.innerText = data.value )
+    .catch( error => console.log('There was an error:', error))
+},false);
