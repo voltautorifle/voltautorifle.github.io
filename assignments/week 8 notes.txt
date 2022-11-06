@@ -1,0 +1,67 @@
+Translation functions allow you to move elements left, right, up, or down. These functions are similar to the behavior of position: relative; when declaring top and left, moving elements up and down or left and right along the x and y axes. When you employ a translation function, you’re moving elements without impacting the flow of the document. Unlike position: relative, which allows you to position an element either against its current position or against a parent or other ancestor, a translated element can only be moved relative to its current position.
+
+The translate(x,y) function moves an element x from the left, and y from the top:
+
+Copy
+transform: translate(45px, -45px);
+If you only want to move an element vertically or horizontally, you can use the translatex or translatey functions respectively. To move 45px to the right along the x axis, include:
+
+Copy
+transform: translateX(45px);
+For our ad, we want to move the word “dukes” over to the right when the user hovers over it, as if it had been punched by our mustachioed pugilist. In the markup, we have:
+
+Copy
+<h1>Put your <span>dukes</span> up, sire</h1>
+Let’s apply the style whenever the user hovers over the h1. This will make the effect more likely to be stumbled across than if it was only triggered by hovering over the span itself:
+
+Copy
+.ad-ad2 h1:hover span {
+    color: #484848;  
+    transform: translateX(40px);
+}
+Wait—this doesn’t work. What gives?
+
+Transforms don’t work on inline elements. But that’s easy enough to fix. We’ll just add display: inline-block; to our span:
+
+Copy
+.ad-ad2 h1 span {
+    font-size: 30px;
+    color: #999999;
+    display: inline-block;
+    The scale(x,y) function scales an element by the defined factors horizontally then vertically. If only one value is provided, it will be used for both the x and y values, growing or shrinking your element or pseudo-element while maintaining the original aspect ratio. For example, scale(1) would leave the element the same size, scale(2) would double its proportions, scale(0.5) would halve them, and so on. Providing different values will distort the element, as you’d expect:
+
+Copy
+transform: scale(1.5, 0.25);
+As with translate, you can also use the scaleX(x) or scaleY(y) functions. These functions will scale only the horizontal dimensions or only the vertical dimensions respectively.
+
+A scaled element will grow outwards from or shrink inwards towards its center; in other words, the element’s center will stay in the same place as its dimensions change. To change this default behavior, you can include the transform-origin property, which we’ll be covering a bit later.
+
+Let’s add a scale transform to our span:
+
+Copy
+.ad-ad2 h1:hover span {
+    color: #484848;  
+    transform: translateX(40px) scale(1.5);
+}
+The rotate() function rotates an element around the point of origin by a specified angle value. As with scale, by default the point of origin is the element’s center. Generally, angles are declared in degrees, with positive degrees moving clockwise and negative moving counterclockwise. In addition to degrees, values can be provided in grads, radians, or turns, but we’ll just be sticking with degrees.
+
+Let’s add a rotate transform to our “dukes”:
+
+Copy
+.ad-ad2 h1:hover span {
+    color: #484848;
+    transform: rotate(10deg) translateX(40px) scale(1.5);
+}
+The skew(x,y) function specifies a skew along the x and y axes. As you’d expect, the x specifies the skew on the x axis, and the y specifies the skew on the y axis. If the second parameter is omitted, the skew will only occur on the x axis:
+
+Copy
+transform: skew(15deg, 4deg);
+Once we’ve defined the color of the stroke and the fill, we’re ready to start drawing! Let’s begin by drawing a rectangle. We can repeat the steps we just took: grabbing the canvas and the context, and setting a fill and stroke style. But now, we’ll draw a rectangle. We can do this by calling the fillRect and strokeRect methods. Both of these methods take the X and Y coordinates where you want to begin drawing the fill or the stroke, and the width and height of the rectangle. We’ll add the stroke and fill 10 pixels from the top and 10 pixels from the left of the canvas’s top-left corner:
+
+Copy
+var canvas = document.getElementById("myCanvas"); 
+var context = canvas.getContext("2d"); 
+context.strokeStyle = "red";
+context.fillStyle = "rgba(0, 0, 255, 0.5)";
+context.fillRect(10, 10, 100, 100);   
+context.strokeRect(10, 10, 100, 100);
