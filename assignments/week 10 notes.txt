@@ -1,0 +1,68 @@
+Different types of client-side validation
+There are two different types of client-side validation that you'll encounter on the web:
+
+Built-in form validation uses HTML form validation features, which we've discussed in many places throughout this module. This validation generally doesn't require much JavaScript. Built-in form validation has better performance than JavaScript, but it is not as customizable as JavaScript validation.
+JavaScript validation is coded using JavaScript. This validation is completely customizable, but you need to create it all (or use a library).
+Using built-in form validation
+One of the most significant features of modern form controls is the ability to validate most user data without relying on JavaScript. This is done by using validation attributes on form elements. We've seen many of these earlier in the course, but to recap:
+
+required: Specifies whether a form field needs to be filled in before the form can be submitted.
+minlength and maxlength: Specifies the minimum and maximum length of textual data (strings).
+min and max: Specifies the minimum and maximum values of numerical input types.
+type: Specifies whether the data needs to be a number, an email address, or some other specific preset type.
+pattern: Specifies a regular expression that defines a pattern the entered data needs to follow.
+If the data entered in a form field follows all of the rules specified by the above attributes, it is considered valid. If not, it is considered invalid.
+
+When an element is valid, the following things are true:
+
+The element matches the :valid CSS pseudo-class, which lets you apply a specific style to valid elements.
+If the user tries to send the data, the browser will submit the form, provided there is nothing else stopping it from doing so (e.g., JavaScript).
+When an element is invalid, the following things are true:
+
+The element matches the :invalid CSS pseudo-class, and sometimes other UI pseudo-classes (e.g., :out-of-range) depending on the error, which lets you apply a specific style to invalid elements.
+
+Simple start file
+Let's start with a simple example: an input that allows you to choose whether you prefer a banana or a cherry. This example involves a simple text <input> with an associated <label> and a submit <button>. Find the source code on GitHub at fruit-start.html and a live example below.
+
+<form>
+  <label for="choose">Would you prefer a banana or cherry?</label>
+  <input id="choose" name="i-like" />
+  <button>Submit</button>
+</form>
+input:invalid {
+  border: 2px dashed red;
+}
+
+input:valid {
+  border: 2px solid black;
+}
+Validating against a regular expression
+Another useful validation feature is the pattern attribute, which expects a Regular Expression as its value. A regular expression (regex) is a pattern that can be used to match character combinations in text strings, so regexps are ideal for form validation and serve a variety of other uses in JavaScript.
+
+Regexps are quite complex, and we don't intend to teach you them exhaustively in this article. Below are some examples to give you a basic idea of how they work.
+
+a — Matches one character that is a (not b, not aa, and so on).
+abc — Matches a, followed by b, followed by c.
+ab?c — Matches a, optionally followed by a single b, followed by c. (ac or abc)
+ab*c — Matches a, optionally followed by any number of bs, followed by c. (ac, abc, abbbbbc, and so on).
+a|b — Matches one character that is a or b.
+abc|xyz — Matches exactly abc or exactly xyz (but not abcxyz or a or y, and so on).
+The Fetch API provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
+
+This kind of functionality was previously achieved using XMLHttpRequest. Fetch provides a better alternative that can be easily used by other technologies such as Service Workers. Fetch also provides a single logical place to define other HTTP-related concepts such as CORS and extensions to HTTP.
+
+The fetch specification differs from jQuery.ajax() in the following significant ways:
+
+The Promise returned from fetch() won't reject on HTTP error status even if the response is an HTTP 404 or 500. Instead, as soon as the server responds with headers, the Promise will resolve normally (with the ok property of the response set to false if the response isn't in the range 200–299), and it will only reject on network failure or if anything prevented the request from completing.
+Unless fetch() is called with the credentials option set to include, fetch():
+won't send cookies in cross-origin requests
+won't set any cookies sent back in cross-origin responses
+As of August 2018, the default credentials policy changed to same-origin. Firefox was also modified in version 61.0b13)
+A basic fetch request is really simple to set up. Have a look at the following code:
+
+fetch('http://example.com/movies.json')
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+Here we are fetching a JSON file across the network and printing it to the console. The simplest use of fetch() takes one argument — the path to the resource you want to fetch — and does not directly return the JSON response body but instead returns a promise that resolves with a Response object.
+
+The Response object, in turn, does not directly contain the actual JSON response body but is instead a representation of the entire HTTP response. So, to extract the JSON body content from the Response object, we use the json() method, which returns a second promise that resolves with the result of parsing the response body text as JSON.
